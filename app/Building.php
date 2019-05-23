@@ -13,4 +13,9 @@ class Building extends Model
     protected $hidden = [
         'owner_id', 'updated_at', 'created_at'
     ];
+
+    public function apartments()
+    {
+        return $this->hasMany('App\Apartment', 'building_id');
+    }
 }
