@@ -37,4 +37,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function buildings()
+    {
+        return $this->hasMany('App\Building', 'owner_id');
+    }
 }
