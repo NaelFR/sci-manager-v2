@@ -25,6 +25,12 @@ Route::post('refresh', 'API\Auth\LoginController@refresh');
 Route::middleware('auth:api')->group(function () {
     Route::get('user', 'API\UserController@index');
     Route::post('logout', 'API\Auth\LoginController@logout');
-    Route::resource('buildings', 'API\BuildingController');
+
+    // Buildings
+    Route::apiResource('buildings', 'API\BuildingController');
+
+    // Apartments
+    Route::apiResource('buildings/{building}/apartments', 'API\ApartmentController', ['only' => ['index', 'store']]);
+    Route::apiResource('apartments', 'API\ApartmentController', ['only' => ['show', 'update', 'destroy']]);
 
 });
