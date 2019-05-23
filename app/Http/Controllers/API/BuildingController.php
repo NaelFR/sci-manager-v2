@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Building;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class BuildingController extends Controller
 {
@@ -15,7 +16,7 @@ class BuildingController extends Controller
      */
     public function index()
     {
-        //
+        return response(Auth::user()->buildings);
     }
 
     /**
@@ -36,7 +37,23 @@ class BuildingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'address_line_1' => 'string|max:100',
+            'address_line_2' => 'string|max:100',
+            'city' => 'string|max:100',
+            'country' => 'string|max:100',
+            'region' => 'string|max:100',
+            'postal_code' => 'string|max:10',
+        ]);
+
+        $attributes = $request->all();
+
+        $attributes += ["owner_id" => Auth::user()->id];
+        $building = new Building($attributes);
+
+        $building->save();
+
+        return response($building);
     }
 
     /**
