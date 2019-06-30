@@ -23,7 +23,7 @@ Route::post('register', 'API\Auth\RegisterController@register');
 Route::post('login', 'API\Auth\LoginController@login');
 Route::post('refresh', 'API\Auth\LoginController@refresh');
 Route::middleware('auth:api')->group(function () {
-    Route::get('user', 'API\UserController@index');
+    Route::get('me', 'API\UserController@index');
     Route::post('logout', 'API\Auth\LoginController@logout');
 
     // Buildings
