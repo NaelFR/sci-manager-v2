@@ -15,7 +15,7 @@ class CreateBuildingsTable extends Migration
     {
         Schema::create('buildings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('owner_id');
+            $table->bigInteger('owner_id')->unsigned();
             $table->string('address_line_1', 100)->nullable(true);
             $table->string('address_line_2', 100)->nullable(true);
             $table->string('city', 100)->nullable(true);
